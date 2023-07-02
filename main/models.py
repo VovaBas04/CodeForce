@@ -6,3 +6,4 @@ class Profile(AbstractUser):
     birth_day = models.DateField(null=True)
     is_staff = models.BooleanField(default=False)
     about_me = models.TextField(null=True)
+    REQUIRED_FIELDS = ['birth_day', 'is_staff', 'about_me']
