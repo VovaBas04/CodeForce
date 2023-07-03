@@ -6,7 +6,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios';
 //Главная страница после регистрации пользователя
 //Задача - передать сюда данные пользователя, полученные по токену в LogPage
-const Home = (match) =>{
+const Home = () =>{
     //Функция навигации - позволяет переходить по страницам используя историю браузера с помощью хука useNavigate
     //(Пока что не используем)
     // const navigate = useNavigate();
@@ -20,11 +20,13 @@ const Home = (match) =>{
     //(Пока что пустые)
     // const {personData, setData} = useState({});
     const [List,setList] = useState([])
-    const { data: { data } = {} } = useLocation();
-    console.log(data)
+    // const { data: { data } = {} } = useLocation();
+    // console.log(data)
     //Хук, выполняющийся при рендере страницы, внутри надо использовать useState и получить данные пользователя
+
+    //{'headers':{'Authorization':'Token '+match.data}}
     useEffect(()=>{
-        axios.get('http://127.0.0.1:8000/home/',{'headers':{'Authorization':'Token '+match.data}} )
+        axios.get('http://127.0.0.1:8000/home/')
         .then((response) =>{
             console.log(response.data) ;
             setList(response.data);
@@ -32,6 +34,7 @@ const Home = (match) =>{
     }, []);
     return(
         <div>
+            Home
             <ul>
                 {List.map(p=>(
                     <li key={p.id}>{p.username}</li>
