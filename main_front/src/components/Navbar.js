@@ -5,7 +5,7 @@ const Navbar = (props) =>(
             <ul>
                     Navbar
                 <li>
-                    <Link to={'/Home'}>Go to Home</Link>
+                    <Link to={'/home'}>Go to Home</Link>
                 </li>
                 <li>
                     <Link to={'/'}>Log In</Link>

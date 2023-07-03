@@ -1,6 +1,7 @@
 import './LogPage.css'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import {Link} from "react-router-dom";
 const LogPage = () => {
 
 
@@ -18,7 +19,7 @@ const LogPage = () => {
          axios.post('http://127.0.0.1:8000/auth/token/login/', formData)
              .then((response) => {
 
-                 axios.get('http://127.0.0.1:8000/auth/users/me/',{'headers':{'Authorization':'Token '+response.data['auth_token']}})
+                 axios.get('http://127.0.0.1:8000/home',{'headers':{'Authorization':'Token '+response.data['auth_token']}})
                      .then((res)=>{
                          setData(res.data)
                         console.log(res.data)
@@ -34,7 +35,9 @@ const LogPage = () => {
             <input type="text" name="username" />
             {/*<input type="email" name="field2" />*/}
             <input type="password" name="password" />
+            <Link to='home' state={{data:data}}>
             <button type="submit">Submit</button>
+            </Link>
         </form>
       </div>
   );
