@@ -13,9 +13,9 @@ const Layout = (props) =>{
         <main className='main'>
             <Outlet/>
         </main>
-        <footer className='footer'>
-            2023
-        </footer>
+        {/*<footer className='footer'>*/}
+        {/*    2023*/}
+        {/*</footer>*/}
         </div>
 
     )

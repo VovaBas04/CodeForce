@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {useState, useEffect} from 'react'
 import axios from 'axios';
+import {useDispatch, useSelector} from "react-redux";
 //Главная страница после регистрации пользователя
 //Задача - передать сюда данные пользователя, полученные по токену в LogPage
 const Home = () =>{
@@ -25,6 +26,20 @@ const Home = () =>{
     //Хук, выполняющийся при рендере страницы, внутри надо использовать useState и получить данные пользователя
 
     //{'headers':{'Authorization':'Token '+match.data}}
+
+
+//
+//     const dispatch = useDispatch();
+//     //для получения состяния - useSelector
+// const token = useSelector(state => state.tokenR.token);
+//     console.log(token + 'penis');
+//
+// const getToken = () =>{
+//     dispatch({type: "GET_TOKEN"});
+// }
+
+
+
     useEffect(()=>{
         axios.get('http://127.0.0.1:8000/home/')
         .then((response) =>{
