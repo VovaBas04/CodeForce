@@ -42,7 +42,7 @@ const LogPage = () => {
             <input type="text" name="username" />
             {/*<input type="email" name="field2" />*/}
             <input type="password" name="password" />
-            <Link to='home' >
+            <Link to='accounts/home' >
             <button type="submit">Submit</button>
             </Link>
         </form>
