@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import UserProfile
-from .serializers import UserProfileSerializer
-
+from .models import UserProfile,Tasks
+from .serializers import UserProfileSerializer,TasksSerializer
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 class GetUserProfileView(APIView):
     def get(self, request, format=None):
         try:
@@ -36,3 +37,7 @@ class UpdateUserProfileView(APIView):
             return Response({ 'profile': user_profile.data, 'username': str(username) })
         except:
             return Response({ 'error': 'Something went wrong when updating profile' })
+class TasksViewSet(ModelViewSet):
+    queryset = Tasks.objects.all()
+    serializer_class =TasksSerializer
+    # permission_classes = (IsAuthenticated, )

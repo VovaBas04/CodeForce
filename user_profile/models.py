@@ -9,4 +9,11 @@ class UserProfile(models.Model):
     city = models.CharField(max_length=20, default='')
 
     def __str__(self):
-        return self.first_name
+        return self.user.username
+class Tasks(models.Model):
+    author=models.ForeignKey(UserProfile,on_delete=models.CASCADE)
+    title=models.CharField(max_length=100)
+    task=models.TextField()
+    test_input=models.FileField(upload_to='input')
+    test_output=models.FileField(upload_to='output')
+
