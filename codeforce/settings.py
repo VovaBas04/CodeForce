@@ -78,13 +78,27 @@ WSGI_APPLICATION = 'codeforce.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+<<<<<<< HEAD
         'NAME': 'session_auth',
         'USER': 'postgres',
         'PASSWORD': 'password123',
         'HOST': 'localhost'
+=======
+        'NAME': 'myproject',
+        'USER': 'vova',
+        'PASSWORD': 'Vovar20003!',
+        'HOST': 'localhost',
+        'PORT': '',
+>>>>>>> 7da01dd93925868fa182bc0f9258dfb2032a6889
     }
 }
 
