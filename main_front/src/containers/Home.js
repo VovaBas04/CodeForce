@@ -20,7 +20,7 @@ const Home = () =>{
     //Данные пользователя, динамически отслеживаемые через хук useState
     //(Пока что пустые)
     // const {personData, setData} = useState({});
-    const [List,setList] = useState([])
+    // const [List,setList] = useState([])
     // const { data: { data } = {} } = useLocation();
     // console.log(data)
     //Хук, выполняющийся при рендере страницы, внутри надо использовать useState и получить данные пользователя
@@ -40,21 +40,21 @@ const Home = () =>{
 
 
 
-    useEffect(()=>{
-        axios.get('http://127.0.0.1:8000/home/')
-        .then((response) =>{
-            console.log(response.data) ;
-            setList(response.data);
-               });
-    }, []);
+    // useEffect(()=>{
+    //     axios.get('http://127.0.0.1:8000/home/')
+    //     .then((response) =>{
+    //         console.log(response.data) ;
+    //         setList(response.data);
+    //            });
+    // }, []);
     return(
         <div>
             Home
-            <ul>
-                {List.map(p=>(
-                    <li key={p.id}>{p.username}</li>
-                ))}
-            </ul>
+            {/*<ul>*/}
+            {/*    {List.map(p=>(*/}
+            {/*        <li key={p.id}>{p.username}</li>*/}
+            {/*    ))}*/}
+            {/*</ul>*/}
         </div>
     );
 
