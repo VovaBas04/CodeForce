@@ -1,7 +1,9 @@
 import {React, Fragment} from 'react'
 import {Link, NavLink} from 'react-router-dom'
+import { connect} from "react-redux";
+import {logout} from "../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
-const Navbar = (props) => {
+const Navbar = ({isAuthenticated, logout}) => {
      //взаимодействие с состоянием из компоненты
     //для изменения состояния нужен диспатч
 //     const dispatch = useDispatch();
@@ -15,6 +17,16 @@ const Navbar = (props) => {
 // const getCash = () =>{
 // dispatch({type: "GET_CASH", payload: 5});
 // }
+const authLinks = (
+    <Fragment>
+        <li className="nav-item">
+            <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
+        </li>
+        <li className="nav-item">
+            <a className="nav-link" onClick={logout} href="">Logout</a>
+        </li>
+    </Fragment>
+);
 
 const guestLinks = (
     <Fragment>
@@ -48,8 +60,7 @@ const guestLinks = (
                         <li className="nav-item">
                             <NavLink className="nav-link" exact to="home">Home</NavLink>
                         </li>
-                        {/*{ isAuthenticated ? authLinks : guestLinks}*/}
-                        {guestLinks}
+                        { isAuthenticated ? authLinks : guestLinks}
                     </ul>
                 </div>
             </div>
@@ -85,4 +96,8 @@ const guestLinks = (
     );
 }
 
-export default Navbar;
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps, { logout })(Navbar);
