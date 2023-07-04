@@ -46,7 +46,7 @@ const guestLinks = (
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact to="/">Home</NavLink>
+                            <NavLink className="nav-link" exact to="home">Home</NavLink>
                         </li>
                         {/*{ isAuthenticated ? authLinks : guestLinks}*/}
                         {guestLinks}
