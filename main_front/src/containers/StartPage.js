@@ -1,17 +1,17 @@
 import {Link} from "react-router-dom";
 import React from "react";
-
+import './StartPage.css'
 const StartPage = () =>{
     return(
         <div className='container'>
-          <div className='mt-5 p-5 bg-light'>
+          <div className='mt-5 p-5 bg-dark-subtle'>
               <h1 className='display-4'>Welcome to CodeForces!</h1>
               <p className='lead'>
                   Ёбаный рот этого казино, блять
               </p>
               <hr className='my-4'/>
               <p>Нажми на кнопку ниже чтобы зарегаться</p>
-              <Link className='btn btn-primary btn-lg' to='/login'>Login</Link>
+              <Link className='btn btn-lg' to='/login'>Login</Link>
           </div>
       </div>
     )
