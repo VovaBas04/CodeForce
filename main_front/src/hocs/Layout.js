@@ -5,7 +5,7 @@ import './Layout.css'
 
 const Layout = (props) =>{
     return (
-        <div>
+        <div className='text-white bg-dark'>
             <header className='header'>
             <Navbar/>
             {props.children}

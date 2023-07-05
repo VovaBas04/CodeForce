@@ -3,6 +3,7 @@ import {Link, NavLink} from 'react-router-dom'
 import { connect} from "react-redux";
 import {logout} from "../actions/auth";
 import {useDispatch, useSelector} from "react-redux";
+import './Navbar.css'
 const Navbar = ({isAuthenticated, logout}) => {
      //взаимодействие с состоянием из компоненты
     //для изменения состояния нужен диспатч
@@ -42,9 +43,9 @@ const guestLinks = (
 
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary sticky-top nav ">
             <div className="container-fluid">
-                <Link className="navbar-brand" exact to="/">Session Auth</Link>
+                <Link className="navbar-brand" exact to="/">Moodle</Link>
                 <button
                     className="navbar-toggler"
                     type="button"
