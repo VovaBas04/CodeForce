@@ -3,19 +3,19 @@ import axios from "axios";
 import {Link} from "react-router-dom";
 import Cookies from "js-cookie";
 
-export const config = {
-        headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
-            "Access-Control-Allow-Origin": "*",
-            'X-CSRFToken': Cookies.get('csrftoken'),
-            'Vary':'Accept'
-        }
-    };
+// export const config = {
+//         headers: {
+//             'Content-Type': 'application/json;charset=UTF-8',
+//             "Access-Control-Allow-Origin": "*",
+//             'X-CSRFToken': Cookies.get('csrftoken'),
+//             'Vary':'Accept'
+//         }
+//     };
 const Dashboard = () => {
 
 
     const [Data,SetData]=useState([])
-    useEffect(()=>{axios.get(`${process.env.REACT_APP_API_URL}/profile/tasks`, config).then((response)=>{
+    useEffect(()=>{axios.get(`${process.env.REACT_APP_API_URL}/profile/tasks`).then((response)=>{
         console.log(response.data)
         SetData(response.data);
     })},[])
@@ -30,7 +30,7 @@ const Dashboard = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{p.title}</h5>
                                     <p className="card-text">{p.task}</p>
-                                    <Link className="btn btn-primary" to={{pathname:`/profile/tasks/${p.id}/`}}>Check</Link>
+                                    <Link className="btn btn-primary" to={{pathname:`/profile/tasks/${p.id}`}}>Check</Link>
                                 </div>
 
                         </div>

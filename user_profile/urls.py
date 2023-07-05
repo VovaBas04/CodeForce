@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import GetUserProfileView, UpdateUserProfileView, TasksViewSet
 from rest_framework.routers import SimpleRouter
-router = SimpleRouter()
+router = SimpleRouter(trailing_slash=False)
 router.register('tasks', TasksViewSet)
 
 urlpatterns = [
