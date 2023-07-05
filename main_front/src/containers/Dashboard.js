@@ -20,7 +20,7 @@ const Dashboard = () => {
         <div>
             Dashboard
             <ul>
-            {Data.map(p=>(
+            {Data.map( p => (
             <li>   <Link to={{pathname:`/profile/tasks/${p.id}/`}}>{p.title}</Link></li>
             ))}
             </ul>
