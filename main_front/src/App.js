@@ -21,6 +21,7 @@ import { Provider} from "react-redux";
 import store from "./store";
 
 import Navbar from "./components/Navbar";
+import AddTask from "./containers/AddTask";
 const App = () => {
     return(
         <Provider store={store}>
@@ -31,6 +32,7 @@ const App = () => {
                       <Route path='register' element={<Register/>}></Route>
                       <Route path='login' element={<Login/>}></Route>
                       <Route path='dashboard' element={<Dashboard/>}></Route>
+                      <Route path='addtask' element={<AddTask/>}></Route>
 
 
                       <Route path='home' element={<Home/>}></Route>

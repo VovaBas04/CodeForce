@@ -9,7 +9,7 @@ import {
     LOGOUT_FAIL,
 } from "./types";
 
-export const login = (username, password) => async dispatch => {
+export const login = (username, password) => async dispatch1 => {
     const config = {
         headers: {
             'Accept': 'application/json',
@@ -24,18 +24,18 @@ export const login = (username, password) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/accounts/login`, body, config);
 
         if (res.data.success) {
-            dispatch({
+            dispatch1({
                 type: LOGIN_SUCCESS
             });
 
             // dispatch(load_user());
         } else {
-            dispatch({
+            dispatch1({
                 type: LOGIN_FAIL
             });
         }
     } catch(err) {
-        dispatch({
+        dispatch1({
             type: LOGIN_FAIL
         });
     }
@@ -101,3 +101,4 @@ export const register = (username, password, re_password) => async dispatch => {
         });
     }
 };
+
