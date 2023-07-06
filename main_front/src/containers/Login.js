@@ -22,23 +22,22 @@ const Login = ({login, isAuthenticated}) => {
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
     if (isAuthenticated){
-        console.log("PENIS")
         return navigate("/dashboard");
     }
 
 
     return(
     <div className='container mt-5'>
-        <h1>Sign into an Account </h1>
+        <h1>Зайти в свою учетную запись </h1>
         <p>Заходи</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
             <div className='form-group'>
-                <label className='form-label'>Username: </label>
+                <label className='form-label'>Логин: </label>
                 <input
                     className='form-control'
                     type='text'
-                    placeholder='Username*'
+                    placeholder='Логин*'
                     name='username'
                     onChange={e => onChange(e)}
                     value={username}
@@ -46,11 +45,11 @@ const Login = ({login, isAuthenticated}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='form-label mt-3'>Password: </label>
+                <label className='form-label mt-3'>Пароль: </label>
                 <input
                     className='form-control'
                     type='password'
-                    placeholder='Password*'
+                    placeholder='Пароль*'
                     name='password'
                     onChange={e => onChange(e)}
                     value={password}
@@ -58,9 +57,9 @@ const Login = ({login, isAuthenticated}) => {
                     required
                 />
             </div>
-            <button className='btn btn-primary mt-3' type='submit'>ВОЙТИ</button>
+            <button className='btn btn-primary mt-3' type='submit'>Войти</button>
         </form>
-        <p className='mt-3'>Еще не смешарик? <Link to='/register'>Sign in</Link>
+        <p className='mt-3'>Первый раз на сайте? <Link to='/register'>Зарегистрироваться</Link>
 
         </p>
     </div>

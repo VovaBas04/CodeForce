@@ -21,10 +21,13 @@ const Navbar = ({isAuthenticated, logout}) => {
 const authLinks = (
     <Fragment>
         <li className="nav-item">
-            <NavLink className="nav-link" to="dashboard">Dashboard</NavLink>
+            <NavLink className="nav-link" to="dashboard">Список задач</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink className="nav-link" onClick={logout} to="/login">Logout</NavLink>
+            <NavLink className="nav-link" to="addtask">Добавить задачу</NavLink>
+        </li>
+        <li className="nav-item">
+            <NavLink className="nav-link" onClick={logout} to="/login">Выйти</NavLink>
             {/*<a className="nav-link" onClick={logout} href="">Logout</a>*/}
         </li>
     </Fragment>
@@ -33,10 +36,10 @@ const authLinks = (
 const guestLinks = (
     <Fragment>
         <li className="nav-item">
-            <NavLink className="nav-link" to="login">Login</NavLink>
+            <NavLink className="nav-link" to="login">Войти</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink className="nav-link" to="register">Register</NavLink>
+            <NavLink className="nav-link" to="register">Зарегистрироваться</NavLink>
         </li>
     </Fragment>
 );
@@ -60,7 +63,7 @@ const guestLinks = (
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink className="nav-link" exact to="home">Home</NavLink>
+                            <NavLink className="nav-link" exact to="home">Аккаунт</NavLink>
                         </li>
                         { isAuthenticated ? authLinks : guestLinks}
                     </ul>
