@@ -26,7 +26,7 @@ const Dashboard = () => {
                 {Data.map( p => (
                     <div className="col">
                         <div className="card">
-                            <img src="../../public/logo192.png" className="card-img-top" alt="img not found"/>
+                            <img src={p.image}  className="card-img-top" />
                                 <div className="card-body">
                                     <h5 className="card-title">{p.title}</h5>
                                     <p className="card-text">{p.task}</p>

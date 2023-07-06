@@ -8,4 +8,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class TasksSerializer(serializers.ModelSerializer):
     class Meta:
         model=Tasks
-        exclude = ['test_input','test_output']
+        fields='__all__'
