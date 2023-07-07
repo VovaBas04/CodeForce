@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 const AddTask = () => {
     const [formData, setFormData] = useState({
-       author: '',
-       id: '',
+       author: 0,
+       id: 0,
        image: '',
         task: '',
         test_input: '',
@@ -25,7 +25,7 @@ const AddTask = () => {
 
     const onSubmit = e => {
       e.preventDefault();
-      addtask(author, id, image,task,test_input,test_output,title);
+      addtask(author, id,task,title);
       console.log('PIPA');
       setTaskCreated(true);
     };
@@ -122,7 +122,7 @@ const AddTask = () => {
                     name='test_input'
                     onChange={e => onChange(e)}
                     value={test_input}
-                    // required
+                    required
                 />
             </div>
             <div className='form-group'>
@@ -134,7 +134,7 @@ const AddTask = () => {
                     name='test_output'
                     onChange={e => onChange(e)}
                     value={test_output}
-                    // required
+                    required
                 />
             </div>
             <button className='btn btn-primary mt-3' type='submit'>Добавить</button>
