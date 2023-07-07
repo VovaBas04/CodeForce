@@ -41,3 +41,20 @@ class TasksViewSet(ModelViewSet):
     queryset = Tasks.objects.all()
     serializer_class =TasksSerializer
     # permission_classes = (IsAuthenticated, )
+# from ..codeforce.settings import MEDIA_URL
+from django.conf import settings
+import os
+class SendDecide(APIView):
+    def post(self,request):
+        try:
+            data=self.request.data
+            task=Tasks.objects.get(task_id=data['id'])
+            programm=data['programm']
+            dir_path=str(data['user_id'].username)+str(data['id'])
+            full_dir_path=os.path.join(settings.MEDIA_URL,'code/'+dir_path)
+            os.mkdir(full_dir_path)
+            f=open(full_dir_path+'/'+'input.txt','w')
+        except:
+            pass
+
+
