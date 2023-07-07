@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import UserProfile,Tasks
 from .serializers import UserProfileSerializer,TasksSerializer
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,AllowAny
 class GetUserProfileView(APIView):
     def get(self, request, format=None):
         try:
@@ -40,7 +40,7 @@ class UpdateUserProfileView(APIView):
 class TasksViewSet(ModelViewSet):
     queryset = Tasks.objects.all()
     serializer_class =TasksSerializer
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (AllowAny, )
 # from ..codeforce.settings import MEDIA_URL
 from django.conf import settings
 import os
