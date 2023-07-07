@@ -16,6 +16,7 @@ import LogPage from './containers/LogPage';
 import ResetPassword from './containers/ResetPassword'
 import Signup from './containers/Signup'
 import Notfound from './containers/Notfound'
+import Task from "./containers/Task";
 
 import { Provider} from "react-redux";
 import store from "./store";
@@ -33,7 +34,7 @@ const App = () => {
                       <Route path='login' element={<Login/>}></Route>
                       <Route path='dashboard' element={<Dashboard/>}></Route>
                       <Route path='addtask' element={<AddTask/>}></Route>
-
+                      <Route path='task/:id' element={<Task/>}></Route>
 
                       <Route path='home' element={<Home/>}></Route>
                       <Route path='reset-password' element={<ResetPassword/>}></Route>
