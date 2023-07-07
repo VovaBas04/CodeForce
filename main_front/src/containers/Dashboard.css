@@ -1,0 +1,23 @@
+/*.card-img-top{*/
+/*    object-fit: cover;*/
+/*        width: 100%;*/
+/*        height: 100%;*/
+/*}*/
+.card-img-container{
+    overflow: hidden;
+}
+.card{
+    height: 40vh;
+    transition: transform .2s;
+}
+.card-text{
+    overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   line-height: 1.3em;
+   height: 3.9em;
+}
+.card:hover{
+    transform: scale(1.1);
+}

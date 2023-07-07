@@ -101,3 +101,4 @@ export const register = (username, password, re_password) => async dispatch => {
         });
     }
 };
+

@@ -26,7 +26,8 @@ SECRET_KEY = 'ysb(#wa4t+ee6^wf*=@d7_(c*z##^6ipkru2yol$elc7ez^7qw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+]
 
 
 # Application definition
@@ -122,7 +123,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -150,5 +151,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
-MEDIA_URL='/media/'
+MEDIA_URL='media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')

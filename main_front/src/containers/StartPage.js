@@ -5,13 +5,13 @@ const StartPage = () =>{
     return(
         <div className='container'>
           <div className='mt-5 p-5 bg-dark-subtle'>
-              <h1 className='display-4'>Welcome to CodeForces!</h1>
+              <h1 className='display-4'>Добро пожаловать!</h1>
               <p className='lead'>
-                  Ёбаный рот этого казино, блять
+                  У тебя всё получится
               </p>
               <hr className='my-4'/>
-              <p>Нажми на кнопку ниже чтобы зарегаться</p>
-              <Link className='btn btn-lg' to='/login'>Login</Link>
+              <p>Нажми на кнопку ниже чтобы войти</p>
+              <Link className='btn btn-lg' to='/login'>Войти</Link>
           </div>
       </div>
     )
