@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Cookies from "js-cookie";
 import './Dashboard.css'
 
@@ -32,7 +32,8 @@ const Dashboard = () => {
                             <div className="card-body">
                                 <h5 className="card-title">{p.title}</h5>
                                 <p className="card-text">{p.task}</p>
-                                <Link className="btn btn-primary" to={{pathname:`/profile/tasks/${p.id}`}}>Check</Link>
+                                <NavLink className="btn btn-primary" to={`/task/${p.id}` }  props={p}>Check</NavLink>
+                                {/*{pathname:`/profile/tasks/${p.id}`}*/}
                             </div>
                         </div>
                     </div>

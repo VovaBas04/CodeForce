@@ -40,18 +40,6 @@ const AddTask = () => {
         <p>Здесь ты можешь добавить свою задачу в список</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
-{/*`           <div className='form-group'>*/}
-{/*                <label className='form-label mt-3'>Автор:</label>*/}
-{/*                <input*/}
-{/*                    className='form-control'*/}
-{/*                    type='text'*/}
-{/*                    placeholder='Автор*'*/}
-{/*                    name='author'*/}
-{/*                    onChange={e => onChange(e)}*/}
-{/*                    value={author}*/}
-{/*                    required*/}
-{/*                />*/}
-{/*            </div>*/}
             <div className='form-group'>
                 <label className='form-label mt-3'>Автор:</label>
                 <input

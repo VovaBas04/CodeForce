@@ -16,5 +16,5 @@ class Tasks(models.Model):
     task=models.TextField()
     test_input=models.FileField(upload_to='input')
     test_output=models.FileField(upload_to='output')
-    image=models.ImageField(upload_to='image',null=True)
+    image=models.ImageField(upload_to='images',null=True)
 
