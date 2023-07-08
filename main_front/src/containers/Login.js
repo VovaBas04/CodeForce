@@ -5,29 +5,52 @@ import { useState} from "react";
 import {Link} from "react-router-dom";
 import CSRFToken from "../components/CSRFToken";
 import { useNavigate } from "react-router-dom";
+import {createPortal} from "react-dom";
+import Modal from "../components/Modal";
+import './Login.css'
 
-const Login = ({login, isAuthenticated}) => {
+
+const incorrectMessage = (isIncorrect) => {
+    if(isIncorrect){
+        return (
+        <div id="errorMessage" className="mt-3">Неверный логин и/или пароль</div>
+    )}
+    return null;
+
+}
+const resetColor = () =>{
+    const err = document.getElementById('errorMessage');
+        if (err){
+            err.style.animation = 'none';
+            setTimeout(() => err.style.animation = 'bs 3s 1',100);
+        }
+}
+
+const Login = ({login, isAuthenticated, isIncorrect}) => {
+
     const [formData, setFormData] = useState({
        username: '',
        password: '',
     });
-
     const navigate = useNavigate();
     const { username, password} = formData;
-
-    const onSubmit = e => {
-      e.preventDefault();
-      login(username, password);
-    };
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-
     if (isAuthenticated){
         return navigate("/dashboard");
     }
+    const onSubmit = e => {
+      e.preventDefault();
+      resetColor()
+      login(username, password);
 
+    };
+    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
 
     return(
     <div className='container mt-5'>
+        {/*{createPortal(*/}
+        {/*<Modal open={isOpen} onClose={() => setIsOpen(false)}/>,*/}
+        {/*document.body*/}
+        {/*)}*/}
         <h1>Зайти в свою учетную запись </h1>
         <p>Заходи</p>
         <form onSubmit={e => onSubmit(e)}>
@@ -57,6 +80,7 @@ const Login = ({login, isAuthenticated}) => {
                     required
                 />
             </div>
+            {incorrectMessage(isIncorrect)}
             <button className='btn btn-primary mt-3' type='submit'>Войти</button>
         </form>
         <p className='mt-3'>Первый раз на сайте? <Link to='/register'>Зарегистрироваться</Link>
@@ -66,6 +90,7 @@ const Login = ({login, isAuthenticated}) => {
     );
 };
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isIncorrect: state.auth.isIncorrect
 });
 export default connect(mapStateToProps, {login})(Login);
