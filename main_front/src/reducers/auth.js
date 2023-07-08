@@ -8,6 +8,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
+    isIncorrect: false,
     isAuthenticated: null,
     username: '',
     first_name: '',
@@ -23,24 +24,36 @@ export default function (state = initialState, action) {
         case REGISTER_SUCCESS:
             return ({
                  ...state,
-            isAuthenticated: false
+            isAuthenticated: false,
+                isIncorrect: false
+
             });
         case LOGIN_SUCCESS:
             return ({
                 ...state,
                 isAuthenticated: true,
+                isIncorrect: false,
                 username: payload
             });
         case LOGOUT_SUCCESS:
             return ({
                  ...state,
             isAuthenticated: false,
+                isIncorrect: false,
                 username: ''
             });
         case LOGIN_FAIL:
+            return ({
+                ...state,
+                isIncorrect: true
+            });
         case LOGOUT_FAIL:
+            return state
         case REGISTER_FAIL:
-            return state;
+            return ({
+                ...state,
+                isIncorrect: true
+            });
         default:
             return state;
     }
