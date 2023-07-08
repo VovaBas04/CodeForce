@@ -49,7 +49,7 @@ export const logout = () => async dispatch => {
             'X-CSRFToken': Cookies.get('csrftoken')
         }
     };
-
+    console.log("Привет из logout")
     const body = JSON.stringify({
         'withCredentials': true
     });

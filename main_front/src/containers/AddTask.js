@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect} from "react-redux";
 import { register} from "../actions/auth";
 import { useState} from "react";
@@ -8,31 +8,31 @@ import {redirect} from "react-router-dom";
 import {addtask} from "../actions/tasks";
 import { useNavigate } from "react-router-dom";
 
-const AddTask = () => {
-    const [formData, setFormData] = useState({
-       author: 0,
-       id: 0,
-       image: '',
-        task: '',
-        test_input: '',
-        test_output: '',
-        title: ''
-    });
-     const [taskCreated, setTaskCreated] = useState(false);
- const navigate = useNavigate();
+const AddTask = ({addtask}) => {
+      const [taskCreated, setTaskCreated] = useState(false);
+          const [formData, setFormData] = useState({
+              author: 0,
+              id: 0,
+              image: '',
+              task: '',
+              test_input: '',
+              test_output: '',
+              title: ''
+          });
+          const navigate = useNavigate();
 
-    const { author, id, image,task,test_input,test_output,title } = formData;
+          const {author, id, image, task, test_input, test_output, title} = formData;
+          const onSubmit = e => {
+                  e.preventDefault();
+                  console.log('Привет из начала submit');
+                  addtask(author, id, task, title);
+                  console.log('Привет из submit');
+                  setTaskCreated(true);
+          };
+          const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
-    const onSubmit = e => {
-      e.preventDefault();
-      addtask(author, id,task,title);
-      console.log('PIPA');
-      setTaskCreated(true);
-    };
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value })
-
-     if (taskCreated)
-        return navigate("/dashboard");
+          if (taskCreated)
+              return navigate("/dashboard");
 
     return(
     <div className='container mt-5'>
@@ -130,9 +130,9 @@ const AddTask = () => {
     </div>
     );
 };
-// const mapStateToProps = state => ({
-//     isAuthenticated: state.auth.isAuthenticated
-// });
-// export default connect(mapStateToProps, {register})(AddTask);
+const mapStateToProps = state => ({
 
-export default AddTask;
+});
+export default connect(mapStateToProps,{addtask})(AddTask);
+
+// export default AddTask;
