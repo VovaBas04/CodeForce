@@ -73,7 +73,7 @@ const AddTask = ({addtask}) => {
                     name='image'
                     onChange={e => onChange(e)}
                     value={image}
-                    required
+                    // required
                 />
             </div>
             <div className='form-group'>
