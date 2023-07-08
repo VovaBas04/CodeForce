@@ -1,9 +1,11 @@
 import {
     TASK_ADDING_SUCCESS,
-    TASK_ADDING_FAIL
+    TASK_ADDING_FAIL,
+    TASK_ADDING_RELOAD
 } from "../actions/types";
 
 const initialState = {
+     is_Create: false,
      author: '',
        id: '',
        image: '',
@@ -20,14 +22,13 @@ export default function (state = initialState, action) {
         case TASK_ADDING_SUCCESS:
             return ({
                 ...state,
-                author: payload.author,
-                id: payload.id,
-                image: payload.image,
-                task: payload.task,
-                test_input: payload.test_input,
-                test_output: payload.test_output,
-                title: payload.title
+                is_created: payload.is_created
             });
+        case TASK_ADDING_RELOAD:
+            return ({
+            ...state,
+            is_created: false
+        })
         case TASK_ADDING_FAIL:
             return state;
         default:
