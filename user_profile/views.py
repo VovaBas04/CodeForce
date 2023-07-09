@@ -42,6 +42,9 @@ class TasksViewSet(ModelViewSet):
     queryset = Tasks.objects.all()
     serializer_class =TasksSerializer
     permission_classes = (AllowAny, )
+    def create(self, request, *args, **kwargs):
+        request.data['author']=self.request.user.id
+        return super().create(request,*args,**kwargs)
 # from ..codeforce.settings import MEDIA_URL
 from django.conf import settings
 import os

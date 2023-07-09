@@ -8,8 +8,7 @@ import {redirect} from "react-router-dom";
 import {addtask} from "../actions/tasks";
 import { useNavigate } from "react-router-dom";
 
-const AddTask = ({addtask,username}) => {
-      console.log(username)
+const AddTask = ({addtask}) => {
       const [taskCreated, setTaskCreated] = useState(false);
           const [formData, setFormData] = useState({
               author: 0,
@@ -21,11 +20,11 @@ const AddTask = ({addtask,username}) => {
           });
           const navigate = useNavigate();
 
-          const {author, image, task, test_input, test_output, title} = formData;
+          const {image, task, test_input, test_output, title} = formData;
           const onSubmit = e => {
                   e.preventDefault();
                   console.log('Привет из начала submit');
-                  addtask(author, task, title);
+                  addtask(task, title);
                   console.log('Привет из submit');
                   setTaskCreated(true);
           };
@@ -40,18 +39,18 @@ const AddTask = ({addtask,username}) => {
         <p>Здесь ты можешь добавить свою задачу в список</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
-            <div className='form-group'>
-                <label className='form-label mt-3'>Автор:</label>
-                <input
-                    className='form-control'
-                    type='number'
-                    placeholder='автор*'
-                    name='author'
-                    onChange={e => onChange(e)}
-                    value={author}
-                    required
-                />
-            </div>
+        {/*    <div className='form-group'>*/}
+        {/*        <label className='form-label mt-3'>Автор:</label>*/}
+        {/*        <input*/}
+        {/*            className='form-control'*/}
+        {/*            type='number'*/}
+        {/*            placeholder='автор*'*/}
+        {/*            name='author'*/}
+        {/*            onChange={e => onChange(e)}*/}
+        {/*            value={author}*/}
+        {/*            required*/}
+        {/*        />*/}
+        {/*    </div>*/}
             {/*<div className='form-group'>*/}
             {/*    <label className='form-label mt-3'>ID:</label>*/}
             {/*    <input*/}
@@ -135,7 +134,6 @@ const AddTask = ({addtask,username}) => {
     );
 };
 const mapStateToProps = state => ({
-    username:state.auth.username
 });
 export default connect(mapStateToProps,{addtask})(AddTask);
 

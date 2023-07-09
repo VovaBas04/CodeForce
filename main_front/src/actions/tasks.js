@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import {TASK_ADDING_FAIL, TASK_ADDING_SUCCESS} from "./types";
 
-export const addtask = (author,task,title) => async dispatch => {
+export const addtask = (task,title) => async dispatch => {
     const formData = new FormData();
     const file_input = document.querySelector('input[name="test_input"]')
     const file_output = document.querySelector('input[name="test_output"]')
@@ -32,7 +32,7 @@ export const addtask = (author,task,title) => async dispatch => {
     formData.append('test_output', file_output.files[0])
     if (image.files[0]!==undefined)
         formData.append('image', image.files[0])
-    formData.append('author', author)
+    // formData.append('author', author)
     formData.append('title', title)
     formData.append('task', task)
     try {
