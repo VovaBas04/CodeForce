@@ -6,6 +6,7 @@ import {useLocation} from "react-router-dom";
 import {useState, useEffect} from 'react'
 import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
+import './Task.css'
 
 export const config = {
         headers: {
@@ -31,26 +32,45 @@ const Task = (props) =>{
             setTask(res.data)
             })
     }, [id]);
+    const onKeyDown = e => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+
+        const
+          input = e.target,
+          val = input.value,
+          start = input.selectionStart,
+          end = input.selectionEnd;
+          input.value = val.substring(0, start) + '\t' + val.substring(end);
+        input.selectionStart = input.selectionEnd = start + 1;
+        return false;
+
+        // input.setSelectionRange(pos, pos);
+      }
+    }
+
     return(
         <div className="container">
             <h1 className="mt-5">{task.title}</h1>
             <p className="mt-3">{task.task}</p>
             <div className="input-group mt-3">
                 <textarea
-                       className="form-control"
+                       id ='textbox'
+                       className="form-control text-white bg-dark-subtle"
                        placeholder='print("Hello world!")'
                        name='code'
-                       rows="10"/>
-                    <button type="button" className="btn btn-outline-secondary">Отправить</button>
-                    <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                        <span className="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                        <li><a className="dropdown-item" href="#">Python</a></li>
-                        <li><a className="dropdown-item" href="#">C++</a></li>
-                    </ul>
+                       rows="10"
+                       onKeyDown={onKeyDown}
+                ></textarea>
             </div>
+            <button type="button" className="mt-5 btn btn-outline-secondary" tabIndex="-1" >Отправить</button>
+            <button type="button" id = "Right_Wing" className="mt-5 btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" tabIndex="-1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Язык программирования
+            </button>
+            <ul className="dropdown-menu dropdown-menu-end">
+                <li><a className="dropdown-item" href="#">Python</a></li>
+                <li><a className="dropdown-item" href="#">C++</a></li>
+            </ul>
         </div>
     );
 };

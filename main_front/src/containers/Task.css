@@ -1,0 +1,11 @@
+.btn{
+    background: linear-gradient(rgba(127,0,255,1), rgba(127,0,255,0.95));
+    color: #dce3ea;
+}
+textarea{
+    resize: none;
+}
+
+#Right_Wing{
+    margin-left: 10px;
+}

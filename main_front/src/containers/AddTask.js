@@ -12,7 +12,6 @@ const AddTask = ({addtask}) => {
       const [taskCreated, setTaskCreated] = useState(false);
           const [formData, setFormData] = useState({
               author: 0,
-              id: 0,
               image: '',
               task: '',
               test_input: '',
@@ -21,11 +20,11 @@ const AddTask = ({addtask}) => {
           });
           const navigate = useNavigate();
 
-          const {author, id, image, task, test_input, test_output, title} = formData;
+          const {image, task, test_input, test_output, title} = formData;
           const onSubmit = e => {
                   e.preventDefault();
                   console.log('Привет из начала submit');
-                  addtask(author, id, task, title);
+                  addtask(task, title);
                   console.log('Привет из submit');
                   setTaskCreated(true);
           };
@@ -40,30 +39,30 @@ const AddTask = ({addtask}) => {
         <p>Здесь ты можешь добавить свою задачу в список</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
-            <div className='form-group'>
-                <label className='form-label mt-3'>Автор:</label>
-                <input
-                    className='form-control'
-                    type='number'
-                    placeholder='автор*'
-                    name='author'
-                    onChange={e => onChange(e)}
-                    value={author}
-                    required
-                />
-            </div>
-            <div className='form-group'>
-                <label className='form-label mt-3'>ID:</label>
-                <input
-                    className='form-control'
-                    type='number'
-                    placeholder='id*'
-                    name='id'
-                    onChange={e => onChange(e)}
-                    value={id}
-                    required
-                />
-            </div>
+        {/*    <div className='form-group'>*/}
+        {/*        <label className='form-label mt-3'>Автор:</label>*/}
+        {/*        <input*/}
+        {/*            className='form-control'*/}
+        {/*            type='number'*/}
+        {/*            placeholder='автор*'*/}
+        {/*            name='author'*/}
+        {/*            onChange={e => onChange(e)}*/}
+        {/*            value={author}*/}
+        {/*            required*/}
+        {/*        />*/}
+        {/*    </div>*/}
+            {/*<div className='form-group'>*/}
+            {/*    <label className='form-label mt-3'>ID:</label>*/}
+            {/*    <input*/}
+            {/*        className='form-control'*/}
+            {/*        type='number'*/}
+            {/*        placeholder='id*'*/}
+            {/*        name='id'*/}
+            {/*        onChange={e => onChange(e)}*/}
+            {/*        value={id}*/}
+            {/*        required*/}
+            {/*    />*/}
+            {/*</div>*/}
             <div className='form-group'>
                 <label className='form-label mt-3'>Картинка:</label>
                 <input
@@ -71,8 +70,10 @@ const AddTask = ({addtask}) => {
                     type='file'
                     placeholder='картинка*'
                     name='image'
+                    accept='image/*'
                     onChange={e => onChange(e)}
                     value={image}
+
                     // required
                 />
             </div>
@@ -111,6 +112,7 @@ const AddTask = ({addtask}) => {
                     onChange={e => onChange(e)}
                     value={test_input}
                     required
+                    accept=".txt"
                 />
             </div>
             <div className='form-group'>
@@ -123,6 +125,7 @@ const AddTask = ({addtask}) => {
                     onChange={e => onChange(e)}
                     value={test_output}
                     required
+                    accept=".txt"
                 />
             </div>
             <button className='btn btn-primary mt-3' type='submit'>Добавить</button>
@@ -131,7 +134,6 @@ const AddTask = ({addtask}) => {
     );
 };
 const mapStateToProps = state => ({
-
 });
 export default connect(mapStateToProps,{addtask})(AddTask);
 

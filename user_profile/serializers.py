@@ -12,8 +12,8 @@ class TasksSerializer(serializers.ModelSerializer):
     def validate(self, data):
         file_input=data['test_input']
         file_output=data['test_output']
-        if file_input.name[-3:]!='txt' or file_output.name[-3:]!='txt':
-            raise serializers.ValidationError("Неверный формат входного(выходного) файла, введите .txt")
+        # if file_input.name[-3:]!='txt' or file_output.name[-3:]!='txt':
+        #     raise serializers.ValidationError("Неверный формат входного(выходного) файла, введите .txt")
         separator=b'$\n'
         file_input.open('r')
         file_output.open('r')
