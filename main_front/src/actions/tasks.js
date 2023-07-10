@@ -74,7 +74,6 @@ export const sendtask = (id, programm) => async dispatch => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/profile/test`, formData,config)
             .then((re) => {
                 console.log(re.data);
-                console.log(re.status)
             }
         )
         dispatch({

@@ -58,9 +58,12 @@ class SendDecide(APIView):
     def return_tests(self,task):
         separator = b'$\n'
         file_input=task.test_input
+        print(file_input)
         file_output=task.test_output
         tests=[]
+        print("AAA")
         # print("В функции тестов",file_input.readlines()[2])
+        print(file_input.readlines())
         text=''
         for input_string in file_input.readlines():
             if input_string!=separator:
@@ -94,30 +97,38 @@ class SendDecide(APIView):
         programm=data['programm']
         dir_path=str(task.author.user.username)+str(data['id'])
         my_path = os.getcwd()
+        print(my_path)
         try:
+            print("a")
             os.chdir(os.getcwd()+settings.MEDIA_URL+'code/')
+            print("b")
             os.mkdir(dir_path)
             os.chdir(os.getcwd()+'/'+dir_path)
+            print(os.getcwd())
             file_input=open('input.txt','w')
             self.create_py_file(programm)
+            print("AAA")
             tests=self.return_tests(task)
+            print("C")
             for number_test,test in enumerate(tests):
                 for string in test[0] :
                     file_input.write(string)
                 file_input.close()
+                print("D")
                 worker1 = cf.ProcessPoolExecutor(max_workers=1)
                 process=worker1.submit(os.system,"python3 main.py")
+                print("never")
                 try:
                     cod=process.result(timeout=3)
                     # cod=process.exception(timeout=3)
                 except:
                     process.cancel()
-                    shutil.rmtree(os.getcwd())
+                    # shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response(
                         {"message": f'Время истекло при исполнении программы на тесте:{number_test + 1}'})
                 if cod:
-                    shutil.rmtree(os.getcwd())
+                    # shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response({"message": f'Ошибка при исполнении программы на тесте:{number_test + 1},код ошибки: {cod}'})
                 file_input = open('input.txt', 'w')
@@ -125,10 +136,10 @@ class SendDecide(APIView):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response({"message": f'Неправильный ответ на тест:{number_test+1}'})
-            shutil.rmtree(os.getcwd())
+            # shutil.rmtree(os.getcwd())
             os.chdir(my_path)
             return Response({"message":"Все окей"})
         except:
-            shutil.rmtree(os.getcwd())
+            # shutil.rmtree(os.getcwd())
             os.chdir(my_path)
             return Response({"message": "Неизвестная ошибка"})
