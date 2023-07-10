@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import axios from "axios";
-import {TASK_ADDING_FAIL, TASK_ADDING_SUCCESS} from "./types";
+import {TASK_ADDING_FAIL, TASK_ADDING_SUCCESS, TASK_SENDING_FAIL, TASK_SENDING_SUCCESS} from "./types";
 
 export const addtask = (task,title) => async dispatch => {
     const formData = new FormData();
@@ -55,6 +55,35 @@ export const addtask = (task,title) => async dispatch => {
     } catch (err) {
         dispatch({
             type: TASK_ADDING_FAIL
+        });
+    }
+}
+
+export const sendtask = (id, programm) => async dispatch => {
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('programm', programm);
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        }
+    };
+    try {
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/profile/test`, formData,config)
+            .then((re) => {
+                console.log(re.data);
+                console.log(re.status)
+            }
+        )
+        dispatch({
+            type: TASK_SENDING_SUCCESS
+        })
+    //
+    } catch (err) {
+        dispatch({
+            type: TASK_SENDING_FAIL
         });
     }
 }

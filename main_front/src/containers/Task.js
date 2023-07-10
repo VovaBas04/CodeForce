@@ -5,8 +5,10 @@ import {useNavigate} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {useState, useEffect} from 'react'
 import axios from 'axios';
-import {useDispatch, useSelector} from "react-redux";
+import {connect, useDispatch, useSelector} from "react-redux";
 import './Task.css'
+import { sendtask} from "../actions/tasks";
+import {logout} from "../actions/auth";
 
 export const config = {
         headers: {
@@ -16,7 +18,7 @@ export const config = {
             'Vary':'Accept'
         }
     };
-const Task = (props) =>{
+const Task = ({sendtask}) =>{
     const {id} = useParams();
     const [task, setTask] = useState({author: 0,
        id: 0,
@@ -24,6 +26,7 @@ const Task = (props) =>{
         task: '',
         test_input: '',
         test_output: '',
+        code: '',
         title: ''});
 
     useEffect(()=>{axios.get(`${process.env.REACT_APP_API_URL}/profile/tasks/${id}`, config)
@@ -48,6 +51,13 @@ const Task = (props) =>{
         // input.setSelectionRange(pos, pos);
       }
     }
+    const { code } = task
+    const onSubmit = e => {
+      e.preventDefault();
+      sendtask(id, code)
+
+    };
+const onChange = e => setTask({...task, [e.target.name]: e.target.value})
 
     return(
         <div className="container">
@@ -61,9 +71,11 @@ const Task = (props) =>{
                        name='code'
                        rows="10"
                        onKeyDown={onKeyDown}
+                       onChange={e => onChange(e)}
+                       value={code}
                 ></textarea>
             </div>
-            <button type="button" className="mt-5 btn btn-outline-secondary" tabIndex="-1" >Отправить</button>
+            <button type="button" className="mt-5 btn btn-outline-secondary" tabIndex="-1" onClick={onSubmit}>Отправить</button>
             <button type="button" id = "Right_Wing" className="mt-5 btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" tabIndex="-1" data-bs-toggle="dropdown" aria-expanded="false">
                         Язык программирования
             </button>
@@ -74,5 +86,8 @@ const Task = (props) =>{
         </div>
     );
 };
+const mapStateToProps = state => ({
 
-export default Task;
+});
+
+export default connect(mapStateToProps, { sendtask })(Task);
