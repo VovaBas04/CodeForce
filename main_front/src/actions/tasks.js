@@ -60,6 +60,7 @@ export const addtask = (task,title) => async dispatch => {
 }
 
 export const sendtask = (id, programm) => async dispatch => {
+    let data = {}
     const formData = new FormData();
     formData.append('id', id);
     formData.append('programm', programm);
@@ -73,12 +74,15 @@ export const sendtask = (id, programm) => async dispatch => {
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/profile/test`, formData,config)
             .then((re) => {
-                console.log(re.data);
+                console.log(re.data)
+                data = re.data
             }
         )
+
         dispatch({
             type: TASK_SENDING_SUCCESS
         })
+        return(data)
     //
     } catch (err) {
         dispatch({

@@ -137,20 +137,25 @@ class SendDecide(APIView):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response(
-                        {"message": f'Время истекло при исполнении программы на тесте:{number_test + 1}'})
+                        {"message": f'Время истекло при исполнении программы на тесте: {number_test + 1}',
+                         "id": -1})
                 if cod:
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
-                    return Response({"message": f'Ошибка при исполнении программы на тесте:{number_test + 1},код ошибки: {cod}'})
+                    return Response({"message": f'Ошибка при исполнении программы на тесте: {number_test + 1}, 'f'код ошибки: {cod}',
+                                     "id": -1})
                 file_input = open('input.txt', 'w')
                 if not self.is_valid_test(test[1]):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
-                    return Response({"message": f'Неправильный ответ на тест:{number_test+1}'})
+                    return Response({"message": f'Неправильный ответ на тест: {number_test+1}',
+                                     "id": -1})
             shutil.rmtree(os.getcwd())
             os.chdir(my_path)
-            return Response({"message":"Все окей"})
+            return Response({"message":"Все окей",
+                             "id": 0})
         except:
             shutil.rmtree(os.getcwd())
             os.chdir(my_path)
-            return Response({"message": "Неизвестная ошибка"})
+            return Response({"message": "Неизвестная ошибка",
+                             "id": -1})
