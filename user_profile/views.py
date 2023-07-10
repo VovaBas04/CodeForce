@@ -58,12 +58,9 @@ class SendDecide(APIView):
     def return_tests(self,task):
         separator = b'$\n'
         file_input=task.test_input
-        print(file_input)
         file_output=task.test_output
         tests=[]
-        print("AAA")
         # print("В функции тестов",file_input.readlines()[2])
-        print(file_input.readlines())
         text=''
         for input_string in file_input.readlines():
             if input_string!=separator:
@@ -85,10 +82,18 @@ class SendDecide(APIView):
         return tests
     def is_valid_test(self,text):
         f=open('output.txt','r')
+        count_text_string=len(text)
+        count=0
         for number_string,output_string in enumerate(f.readlines()):
-            if output_string!=text[number_string]:
+            if number_string==count_text_string or output_string!=text[number_string]:
                 f.close()
+                print(number_string,count_text_string)
                 return False
+            count=number_string
+        if count_text_string!=count+1:
+            f.close()
+            print(count_text_string,count+1)
+            return False
         f.close()
         return True
     def post(self,request):
@@ -106,10 +111,12 @@ class SendDecide(APIView):
             os.chdir(os.getcwd()+'/'+dir_path)
             print(os.getcwd())
             file_input=open('input.txt','w')
+            file_output=open('output.txt','w')
+            file_output.close()
             self.create_py_file(programm)
             print("AAA")
             tests=self.return_tests(task)
-            print("C")
+            print(tests)
             for number_test,test in enumerate(tests):
                 for string in test[0] :
                     file_input.write(string)
@@ -120,15 +127,16 @@ class SendDecide(APIView):
                 print("never")
                 try:
                     cod=process.result(timeout=3)
+                    print(cod)
                     # cod=process.exception(timeout=3)
                 except:
                     process.cancel()
-                    # shutil.rmtree(os.getcwd())
+                    shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response(
                         {"message": f'Время истекло при исполнении программы на тесте:{number_test + 1}'})
                 if cod:
-                    # shutil.rmtree(os.getcwd())
+                    shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response({"message": f'Ошибка при исполнении программы на тесте:{number_test + 1},код ошибки: {cod}'})
                 file_input = open('input.txt', 'w')
@@ -136,10 +144,10 @@ class SendDecide(APIView):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response({"message": f'Неправильный ответ на тест:{number_test+1}'})
-            # shutil.rmtree(os.getcwd())
+            shutil.rmtree(os.getcwd())
             os.chdir(my_path)
             return Response({"message":"Все окей"})
         except:
-            # shutil.rmtree(os.getcwd())
+            shutil.rmtree(os.getcwd())
             os.chdir(my_path)
             return Response({"message": "Неизвестная ошибка"})
