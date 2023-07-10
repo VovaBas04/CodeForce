@@ -35,6 +35,7 @@ export const addtask = (task,title) => async dispatch => {
     // formData.append('author', author)
     formData.append('title', title)
     formData.append('task', task)
+    console.log(formData)
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/profile/tasks`, formData,config).then((re) => {
                 console.log(re.data);
