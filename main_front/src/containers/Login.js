@@ -10,8 +10,8 @@ import Modal from "../components/Modal";
 import './Login.css'
 
 
-const incorrectMessage = (isIncorrect) => {
-    if(isIncorrect){
+const incorrectMessage = (isLoginIncorrect) => {
+    if(isLoginIncorrect){
         return (
         <div id="errorMessage" className="mt-3">Неверный логин и/или пароль</div>
     )}
@@ -26,7 +26,7 @@ const resetColor = () =>{
         }
 }
 
-const Login = ({login, isAuthenticated, isIncorrect}) => {
+const Login = ({login, isAuthenticated, isLoginIncorrect}) => {
 
     const [formData, setFormData] = useState({
        username: '',
@@ -47,10 +47,6 @@ const Login = ({login, isAuthenticated, isIncorrect}) => {
 
     return(
     <div className='container mt-5'>
-        {/*{createPortal(*/}
-        {/*<Modal open={isOpen} onClose={() => setIsOpen(false)}/>,*/}
-        {/*document.body*/}
-        {/*)}*/}
         <h1>Зайти в свою учетную запись </h1>
         <p>Заходи</p>
         <form onSubmit={e => onSubmit(e)}>
@@ -80,7 +76,7 @@ const Login = ({login, isAuthenticated, isIncorrect}) => {
                     required
                 />
             </div>
-            {incorrectMessage(isIncorrect)}
+            {incorrectMessage(isLoginIncorrect)}
             <button className='btn btn-primary mt-3' type='submit'>Войти</button>
         </form>
         <p className='mt-3'>Первый раз на сайте? <Link to='/register'>Зарегистрироваться</Link>
@@ -91,6 +87,6 @@ const Login = ({login, isAuthenticated, isIncorrect}) => {
 };
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
-    isIncorrect: state.auth.isIncorrect
+    isLoginIncorrect: state.auth.isLoginIncorrect
 });
 export default connect(mapStateToProps, {login})(Login);
