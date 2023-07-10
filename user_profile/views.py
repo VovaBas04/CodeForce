@@ -56,35 +56,40 @@ class SendDecide(APIView):
             f.write(i)
         f.close()
     def return_tests(self,task):
-        separator = b'$\n'
+        separators = [b'$\n',b'$']
         file_input=task.test_input
         file_output=task.test_output
         tests=[]
         # print("В функции тестов",file_input.readlines()[2])
         text=''
         for input_string in file_input.readlines():
-            if input_string!=separator:
+            if not input_string in separators:
                 text+=input_string.decode()
             else:
-                tests.append([text.split('\n')])
+                text_test=text.split('\n')
+                text_test=list(map(lambda x:x+'\n',text_test))
+                print(text_test)
+                tests.append([text_test])
                 text=''
-        tests.append([text.split('\n')])
         text=''
         index=0
         for input_string in file_output.readlines():
-            if input_string!=separator:
+            if not input_string in separators:
                 text+=input_string.decode()
             else:
-                tests[index].append(text.split('\n'))
+                text_test = text.split('\n')
+                text_test=list(map(lambda x:x+'\n',text_test))
+                tests[index].append(text_test)
                 text=''
                 index+=1
-        tests[index].append(text.split('\n'))
         return tests
     def is_valid_test(self,text):
         f=open('output.txt','r')
         count_text_string=len(text)
         count=0
         for number_string,output_string in enumerate(f.readlines()):
+            print("Я здесь")
+            print(output_string)
             if number_string==count_text_string or output_string!=text[number_string]:
                 f.close()
                 print(number_string,count_text_string)
@@ -104,9 +109,7 @@ class SendDecide(APIView):
         my_path = os.getcwd()
         print(my_path)
         try:
-            print("a")
             os.chdir(os.getcwd()+settings.MEDIA_URL+'code/')
-            print("b")
             os.mkdir(dir_path)
             os.chdir(os.getcwd()+'/'+dir_path)
             print(os.getcwd())
@@ -114,8 +117,8 @@ class SendDecide(APIView):
             file_output=open('output.txt','w')
             file_output.close()
             self.create_py_file(programm)
-            print("AAA")
             tests=self.return_tests(task)
+            print("Тут такая")
             print(tests)
             for number_test,test in enumerate(tests):
                 for string in test[0] :
