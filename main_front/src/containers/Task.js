@@ -91,6 +91,7 @@ const onChange = e => setTask({...task, [e.target.name]: e.target.value})
         <div className="container">
             <h1 className="mt-5">{task.title}</h1>
             <p className="mt-3">{task.task}</p>
+            <p> Входные данные считываете из input.txt, а выводите в файл output.txt </p>
             <div className="input-group mt-3">
                 <textarea
                        id ='textbox'
@@ -108,8 +109,8 @@ const onChange = e => setTask({...task, [e.target.name]: e.target.value})
                         Язык программирования
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
-                <li><a className="dropdown-item" href="#">Python</a></li>
-                <li><a className="dropdown-item" href="#">C++</a></li>
+                <li><a className="dropdown-item">Python</a></li>
+                {/*<li><a className="dropdown-item" href="#">C++</a></li>*/}
             </ul>
             { resultMessage ? showMessage(resultMessage) : null}
         </div>
