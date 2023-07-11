@@ -37,7 +37,7 @@ const AddTask = ({addtask, isAddingFailed}) => {
     return(
     <div className='container mt-5'>
         <h1>Добавить задачу</h1>
-        <p>Здесь ты можешь добавить свою задачу в список</p>
+        <p>Здесь вы можете добавить свою задачу в список</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
             <div className='form-group'>

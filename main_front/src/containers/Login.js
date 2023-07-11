@@ -35,6 +35,7 @@ const Login = ({login, isAuthenticated, isLoginIncorrect}) => {
     const navigate = useNavigate();
     const { username, password} = formData;
     if (isAuthenticated){
+        console.log('перенаправляю')
         return navigate("/dashboard");
     }
     const onSubmit = e => {

@@ -39,7 +39,7 @@ const Dashboard = ({isAuthenticated}) => {
                             <div className="card-body">
                                 <h5 className="card-title">{p.title}</h5>
                                 <p className="card-text">{p.task}</p>
-                                <NavLink className="btn btn-primary" to={`/task/${p.id}` }  props={p}>Check</NavLink>
+                                <NavLink className="btn btn-primary" to={`/task/${p.id}` }  props={p}>Начать</NavLink>
                                 {/*{pathname:`/profile/tasks/${p.id}`}*/}
                             </div>
                         </div>
