@@ -82,7 +82,7 @@ const AddTask = ({addtask, isAddingFailed}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='form-label mt-3'>Тест инпут:</label>
+                <label className='form-label mt-3'>Входной файл:</label>
                 <input
                     className='form-control'
                     type='file'
@@ -95,7 +95,7 @@ const AddTask = ({addtask, isAddingFailed}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='form-label mt-3'>Тест аутпут:</label>
+                <label className='form-label mt-3'>Выходной файл:</label>
                 <input
                     className='form-control'
                     type='file'

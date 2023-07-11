@@ -68,9 +68,11 @@ class SendDecide(APIView):
         text=''
         for input_string in file_input.readlines():
             if not input_string in separators:
-                text+=input_string.decode()
+                print(input_string, 'YOU')
+                if input_string != b'':
+                    text += input_string.decode()
             else:
-                text_test=text.split('\n')
+                text_test=text.split('\n')[:-1]
                 text_test=list(map(lambda x:x+'\n',text_test))
                 print(text_test)
                 tests.append([text_test])
@@ -79,9 +81,10 @@ class SendDecide(APIView):
         index=0
         for input_string in file_output.readlines():
             if not input_string in separators:
-                text+=input_string.decode()
+                if input_string != b'':
+                    text += input_string.decode()
             else:
-                text_test = text.split('\n')
+                text_test = text.split('\n')[:-1]
                 text_test=list(map(lambda x:x+'\n',text_test))
                 tests[index].append(text_test)
                 text=''
@@ -96,12 +99,12 @@ class SendDecide(APIView):
             print(output_string)
             if number_string==count_text_string or output_string!=text[number_string]:
                 f.close()
-                print(number_string,count_text_string)
+                print(number_string,count_text_string, output_string, text[number_string])
                 return False
             count=number_string
         if count_text_string!=count+1:
             f.close()
-            print(count_text_string,count+1)
+            print(count_text_string,count+1, 'O')
             return False
         f.close()
         return True
