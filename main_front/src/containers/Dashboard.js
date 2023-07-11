@@ -3,6 +3,9 @@ import axios from "axios";
 import {NavLink} from "react-router-dom";
 import Cookies from "js-cookie";
 import './Dashboard.css'
+import {connect} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {login} from "../actions/auth";
 
 // export const config = {
 //         headers: {
@@ -12,13 +15,17 @@ import './Dashboard.css'
 //             'Vary':'Accept'
 //         }
 //     };
-const Dashboard = () => {
+const Dashboard = ({isAuthenticated}) => {
 
 
     const [Data,SetData]=useState([])
     useEffect(()=>{axios.get(`${process.env.REACT_APP_API_URL}/profile/tasks`).then((response)=>{
         SetData(response.data);
     })},[])
+     const navigate = useNavigate()
+    if (!isAuthenticated)
+        return navigate("/login");
+
     return(
         <div className="container bg-grey">
             <h1 className="pt-5 pb-5 text-center">Список задач</h1>
@@ -51,5 +58,8 @@ const Dashboard = () => {
     )
 
 };
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated,
+});
 
-export default Dashboard
+export default connect(mapStateToProps)(Dashboard);

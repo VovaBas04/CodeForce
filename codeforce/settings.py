@@ -93,9 +93,9 @@ WSGI_APPLICATION = 'codeforce.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'session_auth',
-        'USER': 'postgres',
-        'PASSWORD': 'password123',
+        'NAME': 'myproject2',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
         'HOST': 'localhost'
     }
 }

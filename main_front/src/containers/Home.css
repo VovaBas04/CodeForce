@@ -1,0 +1,52 @@
+.card-img-container{
+    overflow: hidden;
+}
+.sz{
+    width: 100%;
+    height: 30vh;
+    transition: transform .2s;
+
+}
+.sz-txt{
+    overflow: hidden;
+    display: -webkit-box;
+   -webkit-line-clamp: 3;
+   -webkit-box-orient: vertical;
+   line-height: 1.3em;
+   height: 3.9em;
+    font-size: 1.4em;
+}
+.sz-tit{
+    font-size: 2em;
+}
+
+.card:hover{
+    transform: scale(1.1);
+}
+
+.marquee-container{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(127,0,255,1), rgba(127,0,255,0.95));
+    overflow: hidden;
+}
+.marquee {
+    font-size: 50px;
+    line-height: 0.8;
+    font-family: sans-serif;
+    padding: 14px 0 0 0;
+    color: #fff;
+    white-space: nowrap;
+    animation: marquee 10s infinite linear; /* notice the infinite */
+}
+.marquee:after{
+    content: " Учебный проект ЛЭТИ выполнили - Новицкий Михаил - Басыров Владимир - Ефремов Артём";
+}
+@keyframes marquee{
+    0% {
+        transform: translateX(0%)
+    }
+    100% {
+        transform: translateX(-50.5%)
+    }
+}

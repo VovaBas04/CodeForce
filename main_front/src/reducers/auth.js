@@ -10,7 +10,7 @@ import {
 const initialState = {
     isLoginIncorrect: false,
     isRegisterIncorrect: false,
-    isAuthenticated: null,
+    isAuthenticated: false,
     username: '',
     first_name: '',
     last_name: '',

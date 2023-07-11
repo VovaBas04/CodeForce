@@ -79,7 +79,6 @@ export const sendtask = (id, programm) => async dispatch => {
                 data = re.data
             }
         )
-
         dispatch({
             type: TASK_SENDING_SUCCESS
         })

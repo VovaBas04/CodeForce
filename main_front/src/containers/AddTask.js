@@ -111,7 +111,7 @@ const AddTask = ({addtask, isAddingFailed}) => {
     );
 };
 const mapStateToProps = state => ({
-    isAddingFailed: state.auth.isAddingFailed,
+    isAddingFailed: state.tasks.isAddingFailed,
 });
 export default connect(mapStateToProps,{addtask})(AddTask);
 

@@ -43,8 +43,12 @@ class TasksViewSet(ModelViewSet):
     serializer_class =TasksSerializer
     permission_classes = (AllowAny, )
     def create(self, request, *args, **kwargs):
-        request.data['author']=self.request.user.id
-        return super().create(request,*args,**kwargs)
+        try:
+            request.data['author']=self.request.user.id
+            return super().create(request,*args,**kwargs)
+        except Exception as err:
+            print('Ошибка:\n', traceback.format_exc())
+            return Response({'message': traceback.format_exc()})
 # from ..codeforce.settings import MEDIA_URL
 from django.conf import settings
 import os
