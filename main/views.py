@@ -30,7 +30,7 @@ class SignupView(APIView):
 
         username = data['username']
         password = data['password']
-        re_password  = data['re_password']
+        re_password = data['re_password']
 
         try:
             if password == re_password:
@@ -91,10 +91,10 @@ class GetCSRFToken(APIView):
 class DeleteAccountView(APIView):
     def delete(self, request, format=None):
         user = self.request.user
-
+        username = user.username
         try:
             User.objects.filter(id=user.id).delete()
 
-            return Response({ 'success': 'User deleted successfully' })
+            return Response({ 'success': 'User deleted successfully', 'username': username })
         except:
             return Response({ 'error': 'Something went wrong when trying to delete user' })

@@ -9,3 +9,22 @@ textarea{
 #Right_Wing{
     margin-left: 10px;
 }
+
+#errorMessage{
+    color: red;
+    animation: bs 3s 1;
+}
+
+#successMessage{
+    color: lightgreen;
+    animation: bs 3s 1;
+}
+
+@keyframes bs{
+  0%{
+    filter: brightness(.6);
+  }
+  100%{
+    filter: brightness(1);
+  }
+}

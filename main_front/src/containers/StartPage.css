@@ -1,4 +1,4 @@
-.btn{
+.btn, .btn:hover, .btn:visited, .btn:active{
     background: linear-gradient(rgba(127,0,255,1), rgba(127,0,255,0.95));
-
+    border-color: rgba(127,0,255,1);
 }

@@ -43,8 +43,12 @@ class TasksViewSet(ModelViewSet):
     serializer_class =TasksSerializer
     permission_classes = (AllowAny, )
     def create(self, request, *args, **kwargs):
-        request.data['author']=self.request.user.id
-        return super().create(request,*args,**kwargs)
+        try:
+            request.data['author']=self.request.user.id
+            return super().create(request,*args,**kwargs)
+        except Exception as err:
+            print('Ошибка:\n', traceback.format_exc())
+            return Response({'message': traceback.format_exc()})
 # from ..codeforce.settings import MEDIA_URL
 from django.conf import settings
 import os
@@ -64,9 +68,11 @@ class SendDecide(APIView):
         text=''
         for input_string in file_input.readlines():
             if not input_string in separators:
-                text+=input_string.decode()
+                print(input_string, 'YOU')
+                if input_string != b'':
+                    text += input_string.decode()
             else:
-                text_test=text.split('\n')
+                text_test=text.split('\n')[:-1]
                 text_test=list(map(lambda x:x+'\n',text_test))
                 print(text_test)
                 tests.append([text_test])
@@ -75,9 +81,10 @@ class SendDecide(APIView):
         index=0
         for input_string in file_output.readlines():
             if not input_string in separators:
-                text+=input_string.decode()
+                if input_string != b'':
+                    text += input_string.decode()
             else:
-                text_test = text.split('\n')
+                text_test = text.split('\n')[:-1]
                 text_test=list(map(lambda x:x+'\n',text_test))
                 tests[index].append(text_test)
                 text=''
@@ -92,12 +99,12 @@ class SendDecide(APIView):
             print(output_string)
             if number_string==count_text_string or output_string!=text[number_string]:
                 f.close()
-                print(number_string,count_text_string)
+                print(number_string,count_text_string, output_string, text[number_string])
                 return False
             count=number_string
         if count_text_string!=count+1:
             f.close()
-            print(count_text_string,count+1)
+            print(count_text_string,count+1, 'O')
             return False
         f.close()
         return True
@@ -137,20 +144,25 @@ class SendDecide(APIView):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
                     return Response(
-                        {"message": f'Время истекло при исполнении программы на тесте:{number_test + 1}'})
+                        {"message": f'Время истекло при исполнении программы на тесте: {number_test + 1}',
+                         "id": -1})
                 if cod:
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
-                    return Response({"message": f'Ошибка при исполнении программы на тесте:{number_test + 1},код ошибки: {cod}'})
+                    return Response({"message": f'Ошибка при исполнении программы на тесте: {number_test + 1}, 'f'код ошибки: {cod}',
+                                     "id": -1})
                 file_input = open('input.txt', 'w')
                 if not self.is_valid_test(test[1]):
                     shutil.rmtree(os.getcwd())
                     os.chdir(my_path)
-                    return Response({"message": f'Неправильный ответ на тест:{number_test+1}'})
+                    return Response({"message": f'Неправильный ответ на тест: {number_test+1}',
+                                     "id": -1})
             shutil.rmtree(os.getcwd())
             os.chdir(my_path)
-            return Response({"message":"Все окей"})
+            return Response({"message":"Все окей",
+                             "id": 0})
         except:
             shutil.rmtree(os.getcwd())
             os.chdir(my_path)
-            return Response({"message": "Неизвестная ошибка"})
+            return Response({"message": "Неизвестная ошибка",
+                             "id": -1})

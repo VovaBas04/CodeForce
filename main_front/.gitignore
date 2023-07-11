@@ -8,8 +8,11 @@
 # testing
 /coverage
 
+<<<<<<< HEAD
 # production
 #/build
+=======
+>>>>>>> e8c2c591e50057690c226e917d5d4f4d302b296e
 # misc
 .DS_Store
 .env.local

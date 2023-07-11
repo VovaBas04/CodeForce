@@ -26,7 +26,7 @@ SECRET_KEY = 'ysb(#wa4t+ee6^wf*=@d7_(c*z##^6ipkru2yol$elc7ez^7qw'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [
+ALLOWED_HOSTS = ['*'
 ]
 
 
@@ -56,9 +56,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3030',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3030',
+# ]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = ['*']
 ROOT_URLCONF = 'codeforce.urls'
 
 TEMPLATES = [
@@ -84,21 +87,22 @@ WSGI_APPLICATION = 'codeforce.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'session_auth',
-        'USER': 'postgres',
-        'PASSWORD': 'password123',
-        'HOST': 'localhost'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'session_auth',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password123',
+#         'HOST': 'localhost'
+#     }
+# }
 
 
 # Password validation

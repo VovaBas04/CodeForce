@@ -10,6 +10,28 @@ import './Task.css'
 import { sendtask} from "../actions/tasks";
 import {logout} from "../actions/auth";
 
+
+const showMessage = (data) => {
+    if(data.id === 0){
+        return (
+        <div id="successMessage" className="mt-3">{data.message}</div>
+    )
+    } else{
+        return (
+        <div id="errorMessage" className="mt-3">{data.message}</div>
+    )}
+}
+
+const resetColor = () =>{
+    let err = document.getElementById('errorMessage');
+    if (!err)
+         err = document.getElementById('successMessage');
+    console.log(err)
+    if (err){
+        err.style.animation = 'none';
+        setTimeout(() => err.style.animation = 'bs 3s 1',100);
+    }
+}
 export const config = {
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
@@ -20,6 +42,8 @@ export const config = {
     };
 const Task = ({sendtask}) =>{
     const {id} = useParams();
+
+    const [resultMessage, setResultMessage] = useState(null)
     const [task, setTask] = useState({author: 0,
        id: 0,
        image: '',
@@ -31,7 +55,6 @@ const Task = ({sendtask}) =>{
 
     useEffect(()=>{axios.get(`${process.env.REACT_APP_API_URL}/profile/tasks/${id}`, config)
         .then(res => {
-            console.log(res.data)
             setTask(res.data)
             })
     }, [id]);
@@ -54,7 +77,12 @@ const Task = ({sendtask}) =>{
     const { code } = task
     const onSubmit = e => {
       e.preventDefault();
+      resetColor()
       sendtask(id, code)
+          .then(response=>{
+              console.log(response)
+              setResultMessage(response);
+          })
 
     };
 const onChange = e => setTask({...task, [e.target.name]: e.target.value})
@@ -63,6 +91,7 @@ const onChange = e => setTask({...task, [e.target.name]: e.target.value})
         <div className="container">
             <h1 className="mt-5">{task.title}</h1>
             <p className="mt-3">{task.task}</p>
+            <p> Входные данные считываете из input.txt, а выводите в файл output.txt </p>
             <div className="input-group mt-3">
                 <textarea
                        id ='textbox'
@@ -80,9 +109,10 @@ const onChange = e => setTask({...task, [e.target.name]: e.target.value})
                         Язык программирования
             </button>
             <ul className="dropdown-menu dropdown-menu-end">
-                <li><a className="dropdown-item" href="#">Python</a></li>
-                <li><a className="dropdown-item" href="#">C++</a></li>
+                <li><a className="dropdown-item">Python</a></li>
+                {/*<li><a className="dropdown-item" href="#">C++</a></li>*/}
             </ul>
+            { resultMessage ? showMessage(resultMessage) : null}
         </div>
     );
 };

@@ -7,6 +7,10 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     LOGOUT_FAIL,
+    RESET_FAIL,
+    RESET_SUCCESS,
+    DELETE_SUCCESS,
+    DELETE_FAIL
 } from "./types";
 
 export const login = (username, password) => async dispatch => {
@@ -82,7 +86,8 @@ export const register = (username, password, re_password) => async dispatch => {
     };
 
     const body = JSON.stringify({ username, password, re_password});
-
+    console.log('register')
+    console.log(body)
     try {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/accounts/register`, body, config)
 
@@ -98,6 +103,31 @@ export const register = (username, password, re_password) => async dispatch => {
     } catch(err) {
         dispatch({
                 type: REGISTER_FAIL
+        });
+    }
+};
+
+export const reset = (password, re_password) => async dispatch => {
+    const config = {
+        headers: {
+            'Accept':'application/json',
+            'Content-Type':'application/json',
+            'X-CSRFToken': Cookies.get('csrftoken')
+        }
+    };
+    console.log(password, re_password)
+
+    try {
+        const res = await axios.delete(`${process.env.REACT_APP_API_URL}/accounts/delete`, config)
+
+        const username = res.data.username
+        dispatch({
+            type: DELETE_SUCCESS
+        })
+        return(username)
+    }catch(err) {
+        dispatch({
+                type: DELETE_FAIL
         });
     }
 };

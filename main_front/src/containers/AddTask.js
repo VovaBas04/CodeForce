@@ -8,7 +8,7 @@ import {redirect} from "react-router-dom";
 import {addtask} from "../actions/tasks";
 import { useNavigate } from "react-router-dom";
 
-const AddTask = ({addtask}) => {
+const AddTask = ({addtask, isAddingFailed}) => {
       const [taskCreated, setTaskCreated] = useState(false);
           const [formData, setFormData] = useState({
               author: 0,
@@ -23,52 +23,31 @@ const AddTask = ({addtask}) => {
           const {image, task, test_input, test_output, title} = formData;
           const onSubmit = e => {
                   e.preventDefault();
-                  console.log('Привет из начала submit');
-                  addtask(task, title);
-                  console.log('Привет из submit');
-                  setTaskCreated(true);
+                  addtask(task, title)
+                    .then(response =>{
+                        if (!isAddingFailed)
+                            setTaskCreated(true);
+            });
           };
           const onChange = e => setFormData({...formData, [e.target.name]: e.target.value})
 
-          if (taskCreated)
+          if (taskCreated && !isAddingFailed)
               return navigate("/dashboard");
 
     return(
     <div className='container mt-5'>
         <h1>Добавить задачу</h1>
-        <p>Здесь ты можешь добавить свою задачу в список</p>
+        <p>Здесь вы можете добавить свою задачу в список</p>
+        <p>Тестовые файлы необходимо загружать в формате.txt. В файле для разделения тестов используйте условный символ-сепаратор - '$'.
+            В конце текстового файла необходимо разместить условный символ-сепаратор - '$'</p>
         <form onSubmit={e => onSubmit(e)}>
             <CSRFToken/>
-        {/*    <div className='form-group'>*/}
-        {/*        <label className='form-label mt-3'>Автор:</label>*/}
-        {/*        <input*/}
-        {/*            className='form-control'*/}
-        {/*            type='number'*/}
-        {/*            placeholder='автор*'*/}
-        {/*            name='author'*/}
-        {/*            onChange={e => onChange(e)}*/}
-        {/*            value={author}*/}
-        {/*            required*/}
-        {/*        />*/}
-        {/*    </div>*/}
-            {/*<div className='form-group'>*/}
-            {/*    <label className='form-label mt-3'>ID:</label>*/}
-            {/*    <input*/}
-            {/*        className='form-control'*/}
-            {/*        type='number'*/}
-            {/*        placeholder='id*'*/}
-            {/*        name='id'*/}
-            {/*        onChange={e => onChange(e)}*/}
-            {/*        value={id}*/}
-            {/*        required*/}
-            {/*    />*/}
-            {/*</div>*/}
             <div className='form-group'>
                 <label className='form-label mt-3'>Картинка:</label>
                 <input
                     className='form-control'
                     type='file'
-                    placeholder='картинка*'
+                    placeholder='картинка'
                     name='image'
                     accept='image/*'
                     onChange={e => onChange(e)}
@@ -103,7 +82,7 @@ const AddTask = ({addtask}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='form-label mt-3'>Тест инпут:</label>
+                <label className='form-label mt-3'>Входной файл:</label>
                 <input
                     className='form-control'
                     type='file'
@@ -116,7 +95,7 @@ const AddTask = ({addtask}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='form-label mt-3'>Тест аутпут:</label>
+                <label className='form-label mt-3'>Выходной файл:</label>
                 <input
                     className='form-control'
                     type='file'
@@ -134,6 +113,7 @@ const AddTask = ({addtask}) => {
     );
 };
 const mapStateToProps = state => ({
+    isAddingFailed: state.tasks.isAddingFailed,
 });
 export default connect(mapStateToProps,{addtask})(AddTask);
 
