@@ -79,9 +79,7 @@ const Login = ({login, isAuthenticated, isLoginIncorrect}) => {
             <button className='btn btn-primary mt-3' type='submit'>Войти</button>
         </form>
         {incorrectMessage(isLoginIncorrect)}
-        <p className='mt-3'>Первый раз на сайте? <Link to='/register'>Зарегистрироваться</Link>
-
-        </p>
+        <p className='mt-3'>Первый раз на сайте? <Link to='/register'>Зарегистрироваться</Link></p>
     </div>
     );
 };

@@ -8,12 +8,12 @@ import Home from './containers/Home'
 import Register from './containers/Register'
 import Login from './containers/Login'
 import Dashboard from './containers/Dashboard'
-
+import ResetPassword from './containers/ResetPassword'
 import LogPage from './containers/LogPage';
 
 
 
-import ResetPassword from './containers/ResetPassword'
+
 import Signup from './containers/Signup'
 import Notfound from './containers/Notfound'
 import Task from "./containers/Task";
@@ -35,9 +35,8 @@ const App = () => {
                       <Route path='dashboard' element={<Dashboard/>}></Route>
                       <Route path='addtask' element={<AddTask/>}></Route>
                       <Route path='task/:id' element={<Task/>}></Route>
-
                       <Route path='home' element={<Home/>}></Route>
-                      <Route path='reset-password' element={<ResetPassword/>}></Route>
+                      <Route path='resetpassword' element={<ResetPassword/>}></Route>
                       <Route path='signup' element={<Signup/>}></Route>
                       <Route path='*' element={<Notfound/>}></Route>
                   </Route>

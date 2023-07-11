@@ -27,8 +27,10 @@ const authLinks = (
             <NavLink className="nav-link" to="addtask">Добавить задачу</NavLink>
         </li>
         <li className="nav-item">
+            <NavLink className="nav-link" to="/resetpassword">Изменить пароль</NavLink>
+        </li>
+        <li className="nav-item">
             <NavLink className="nav-link" onClick={logout} to="/login">Выйти</NavLink>
-            {/*<a className="nav-link" onClick={logout} href="">Logout</a>*/}
         </li>
     </Fragment>
 );

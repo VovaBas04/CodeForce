@@ -4,13 +4,16 @@ import {
     LOGIN_SUCCESS,
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
-    LOGOUT_FAIL
+    LOGOUT_FAIL,
+    RESET_FAIL,
+    RESET_SUCCESS
 } from "../actions/types";
 
 const initialState = {
     isLoginIncorrect: false,
     isRegisterIncorrect: false,
     isAuthenticated: false,
+    isResetIncorrect: false,
     username: '',
     first_name: '',
     last_name: '',
@@ -57,6 +60,16 @@ export default function (state = initialState, action) {
             return ({
                 ...state,
                 isRegisterIncorrect: true
+            });
+        case RESET_SUCCESS:
+            return ({
+                ...state,
+                isResetIncorrect: false
+            });
+        case RESET_FAIL:
+            return ({
+                ...state,
+                isResetIncorrect: true
             });
         default:
             return state;
